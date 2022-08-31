@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "bdd:start": "bdd",
+    "bdd:init": "bdd-init",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@cloudeou/telus-bdd": "^1.5.17"
+  }
+}
