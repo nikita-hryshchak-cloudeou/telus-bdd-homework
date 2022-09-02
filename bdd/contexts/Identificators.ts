@@ -1,4 +1,4 @@
 export const Identificators = {
   ErrorContext: "ErrorContext",
-  AddressContext: "AddressContext"
-}
+  AddressContext: "AddressContext",
+};

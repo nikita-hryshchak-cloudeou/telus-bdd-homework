@@ -1,13 +1,16 @@
-import { Identificators } from '../Identificators';
+import { Identificators } from "../Identificators";
 
 export default class AddressContext {
-    public identificator: string = Identificators.AddressContext;
-    public id: number = NaN;
-    public ipAddress: string = '';
-    public textAddress: string = '';
-    public lat: number = NaN;
-    public lon: number = NaN;
-    public addressTable: string = '';
-    public latColumn: string = '';
-    public lonColumn: string = '';
+  public identificator: string = Identificators.AddressContext;
+  public id: number = NaN;
+  public ipAddress: string = "";
+  public latFromIp: number = NaN;
+  public lonFromIp: number = NaN;
+  public textAddress: string = "";
+  public latFromText: number = NaN;
+  public lonFromText: number = NaN;
+  public addressTable: string = "";
+  public latColumn: string = "";
+  public lonColumn: string = "";
+  public distance: number = NaN;
 }

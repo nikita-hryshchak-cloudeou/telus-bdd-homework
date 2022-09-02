@@ -1,6 +1,6 @@
 export default `
 create table users (
-    id SERIAL PRIMARY KEY,
+    id serial primary key,
     first_name varchar(100),
     last_name varchar(100),
     env text,
@@ -9,19 +9,20 @@ create table users (
 );
 
 create table addresses (
-    id SERIAL PRIMARY KEY,
-    user_id int8 constraint fk_addresses_users REFERENCES users(id),
+    id serial primary key,
+    user_id int8 constraint fk_addresses_users references users(id),
     address_text text not null,
     ip_address inet not null,
-    ip_lat int8,
-    ip_lon int8,
-    address_lat int8,
-    address_lon int8,
-    processing boolean,
-    processed  boolean,
+    ip_lat real,
+    ip_lon real,
+    address_lat real,
+    address_lon real,
+    processing boolean default false,
+    processed  boolean default false,
+    correct boolean,
     error text,
-    env text,
+    env text default 'dev',
     created_date timestamp default now(),
     updated_date timestamp default now()
 );
-`
+`;
