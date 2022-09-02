@@ -20,4 +20,4 @@ export const writeCorrectToDbQuery = (
 };
 
 export const finishAddressFeature = (addressId: number) =>
-  `update addresses set processing=false, processed=true where id=${addressId}`;
+  `update addresses set updated_date=now(), processing=false, processed=true where id=${addressId}`;
