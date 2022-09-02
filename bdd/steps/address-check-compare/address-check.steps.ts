@@ -47,16 +47,16 @@ export const addressCheckSteps = ({
         case "ip":
           const ipAddress: string = addressContext().ipAddress;
           const coordsFromIp = await ipApiClient.getIpGeocode(ipAddress);
-          addressContext().latFromIp = coordsFromIp.lat;
-          addressContext().lonFromIp = coordsFromIp.lon;
+          addressContext().lat = coordsFromIp.lat;
+          addressContext().lon = coordsFromIp.lon;
           break;
         case "text":
           const textAddress: string = addressContext().textAddress;
           const coordsFromText = await mapBoxClient.getAdressGeocode(
             textAddress
           );
-          addressContext().latFromText = coordsFromText.lat;
-          addressContext().lonFromText = coordsFromText.lon;
+          addressContext().lat = coordsFromText.lat;
+          addressContext().lon = coordsFromText.lon;
           break;
       }
     } catch (error) {
@@ -72,30 +72,15 @@ export const addressCheckSteps = ({
     async (latCol: string, lonCol: string) => {
       try {
         console.log("Writing coordinates to DB");
-        switch (latCol) {
-          case "ip_lat":
-            await postgresQueryExecutor(
-              writeCoordinatesToDbQuery(
-                addressContext().id,
-                latCol,
-                lonCol,
-                addressContext().latFromIp,
-                addressContext().lonFromIp
-              )
-            );
-            break;
-          case "address_lat":
-            await postgresQueryExecutor(
-              writeCoordinatesToDbQuery(
-                addressContext().id,
-                latCol,
-                lonCol,
-                addressContext().latFromText,
-                addressContext().lonFromText
-              )
-            );
-            break;
-        }
+        await postgresQueryExecutor(
+          writeCoordinatesToDbQuery(
+            addressContext().id,
+            latCol,
+            lonCol,
+            addressContext().lat,
+            addressContext().lon
+          )
+        );
       } catch (error) {
         const errorJson = JSON.stringify(error);
         const errorText = `Error while writing coordinates to DB: ${errorJson}`;
